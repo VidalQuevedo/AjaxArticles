@@ -15,7 +15,7 @@
 			var al = this;
 			var req = new XMLHttpRequest();
 			
-			req.open('get', 'data.json', true);
+			req.open('get', 'http://www.corsproxy.com/www.whitehouse.gov/facts/json/all/college%20affordability', true);
 			
 			req.onload = function(){ 
 				
@@ -41,6 +41,7 @@
 			} else if (this.data.length === 1 && this.data[0]["Error"]) {
 				output = this.data[0]["Error"];
 			} else {
+				this.data.sort(this.compareArticleTitles);
 				this.data.forEach(function(i){
 					output+= al.formatArticle(i);
 				});
@@ -67,9 +68,27 @@
 			'</article>';
 
 			return output;
+		},
+		compareArticleTitles: function(a,b){
+			
+			a.url_title = this.addTitleCase(a.url_title);
+			b.url_title = this.addTitleCase(b.url_title);
+
+			if (a.url_title < b.url_title) {
+				return -1;
+			} else if (a.url_title > b.url_title) {
+				return 1;
+			} else {
+				return 0;
+			}
+		},
+		addTitleCase: function(str) {
+			return str.split(' ').forEach(function(word){
+				return word.charAt(0).toUpperCase() + word.substr(1);
+			}).join(' ');
 		}
 	};
 
-	app.articleList = new ArticleList();
+	app.articleList = new ArticleList(); // attaching ArticleList to the global app object allows to keep it separate from other units.
 
 })(window.app = window.app || {});
