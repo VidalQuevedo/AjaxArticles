@@ -46,7 +46,7 @@
 				});
 			}
 
-			// console.log(document.querySelector('#article-container').innerHTML(output));
+			document.querySelector('#article-container').innerHTML = output;
 		},
 		formatArticle: function(article){
 			var output = '<article>' +
