@@ -41,12 +41,20 @@
 			} else if (this.data.length === 1 && this.data[0]["Error"]) {
 				output = this.data[0]["Error"];
 			} else {
+				
+				// Add Title Case formatting to all titles for better sorting
+				this.addTitleCase();
+				
+				// Order articles by url_title
 				this.data.sort(this.compareArticleTitles);
+
+				// Generate output
 				this.data.forEach(function(i){
 					output+= al.formatArticle(i);
 				});
 			}
 
+			// Add articles to #article-container
 			document.querySelector('#article-container').innerHTML = output;
 		},
 		formatArticle: function(article){
@@ -70,9 +78,6 @@
 			return output;
 		},
 		compareArticleTitles: function(a,b){
-			
-			a.url_title = this.addTitleCase(a.url_title);
-			b.url_title = this.addTitleCase(b.url_title);
 
 			if (a.url_title < b.url_title) {
 				return -1;
@@ -82,10 +87,12 @@
 				return 0;
 			}
 		},
-		addTitleCase: function(str) {
-			return str.split(' ').forEach(function(word){
-				return word.charAt(0).toUpperCase() + word.substr(1);
-			}).join(' ');
+		addTitleCase: function() {
+			this.data.forEach(function(a){
+				a.url_title = a.url_title.split(' ').map(function(word){
+					return word.charAt(0).toUpperCase() + word.substr(1);
+				}).join(' ');
+			});
 		}
 	};
 
