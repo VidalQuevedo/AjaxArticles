@@ -54,6 +54,15 @@
 			'		<h1>' +
 			'			<a href="' + article.url + '"> ' + article.url_title + ' </a>' +
 			'		</h1>' +
+			'		<p>' +
+			'			Body: "' + article.body + '" <br>' +
+			'			Category: "' + article.category + '" <br>' +
+			'			Path: "' + article.path + '" <br>' +
+			'			Type: "' + article.type + '" <br>' +
+			'			UID: "' + article.uid + '" <br>' +
+			'			URL: "' + article.url + '" <br>' +
+			'			URL Title: "' + article.url_title +'" '+ 
+			'		</p>' +
 			'	</header>' +
 			'</article>';
 
