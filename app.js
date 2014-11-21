@@ -15,7 +15,7 @@
 			var al = this;
 			var req = new XMLHttpRequest();
 			
-			req.open('get', 'http://www.corsproxy.com/www.whitehouse.gov/facts/json/all/college%20affordability', true);
+			req.open('get', 'data.json', true);
 			
 			req.onload = function(){ 
 				
@@ -46,7 +46,7 @@
 				});
 			}
 
-			console.log(document.querySelector('#article-container').innerHTML(output));
+			// console.log(document.querySelector('#article-container').innerHTML(output));
 		},
 		formatArticle: function(article){
 			var output = '<article>' +
