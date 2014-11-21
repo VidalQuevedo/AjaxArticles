@@ -5,12 +5,12 @@
 	function ArticleList(){
 		
 		this.data = [];
-		this.getArticleData();
+		this.getArticleData(this.renderArticleList);
 
 	}
 
 	ArticleList.prototype = {
-		getArticleData: function(){
+		getArticleData: function(callback){
 
 			var al = this;
 			var req = new XMLHttpRequest();
@@ -27,7 +27,7 @@
 					al.data = JSON.parse(this.responseText);
 				}
 				
-				al.renderArticleList();
+				callback.apply(al);
 			};
 			
 			req.send();
